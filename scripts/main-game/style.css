@@ -48,6 +48,14 @@ body, html {
   display: none;
 }
 
+/* Input */
+
+input#mobileInput {
+  display: none;
+}
+
+/* Buttons */
+
 /* Texts */
 
 h1.title1 {
