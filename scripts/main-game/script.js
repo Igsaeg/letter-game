@@ -2,7 +2,7 @@
 const scoreElement = document.getElementById("score");
 const letterElement = document.getElementById("letters");
 const feedbackElement = document.getElementById("feedback");
-const mobileInputElement = document.getElementById('mobileInput');
+const mobileInputElement = document.getElementById("mobileInput");
 
 // Constants
 const letters = [
@@ -30,51 +30,53 @@ function initGame() {
 function checkInput() {
   if (userInput === letterValue) {
     score += 100;
-    feedbackElement.innerHTML = `Correct!`
+    feedbackElement.innerHTML = `Correct!`;
   } else {
     score -= 50;
-    feedbackElement.innerHTML = `Wrong, you pressed ${userInput.toUpperCase()}.`
+    feedbackElement.innerHTML = `Wrong, you pressed ${userInput.toUpperCase()}.`;
   }
-  scoreElement.innerHTML = `Score: ${score}`
+  score0Handler();
+  scoreElement.innerHTML = `Score: ${score}`;
   initGame();
+}
+
+function score0Handler() {
+  if (score <= 0) {
+    score = 0;
+  }
 }
 
 function toggleMobileMode() {
   if (displaySwitch === 0) {
     mobileInputElement.style.display = "block";
-    mobileMode = true;
     displaySwitch = 1;
   } else {
     mobileInputElement.style.display = "";
-    mobileMode = false;
     displaySwitch = 0;
   }
-  console.log(mobileMode)
 }
+
+// Event Listiners
+document.addEventListener('keydown', function (event) {
+  const letterRegex = /^[a-zA-Z]$/;
+  if (!keyPressed && letterRegex.test(event.key)) {
+    userInput = event.key.toLowerCase();
+    keyPressed = true;
+    checkInput();
+  }
+});
+
+document.addEventListener('keyup', function (event) {
+  keyPressed = false;
+});
+
+mobileInputElement.addEventListener('input', () => {
+  userInput = mobileInputElement.value.toLowerCase();
+  checkInput();
+  mobileInputElement.value = "";
+});
 
 // Event Listeners
-if (mobileMode === false) {
-  addEventListener('keydown', function(event) {
-    const letterRegex = /^[a-zA-Z]$/;
-    if (!keyPressed && letterRegex.test(event.key)) {
-      userInput = event.key.toLowerCase();
-      keyPressed = true;
-      checkInput();
-  }
-  });
-
-  addEventListener('keyup', function(event) {
-    keyPressed = false;
-  });
-} else {
-  mobileInputElement.addEventListener('input', () => {
-    userInput = mobileInputElement.value.toLowerCase();
-    checkInput();
-    mobileInputElement.value = "";
-  });
-}
-
-// Initialization
 document.addEventListener("DOMContentLoaded", () => {
   setTimeout(() => {
     document.getElementById("loader").style.display = "none";
