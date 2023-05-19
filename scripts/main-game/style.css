@@ -50,11 +50,40 @@ body, html {
 
 /* Input */
 
-input#mobileInput {
+#mobileInput {
   display: none;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 10px;
+  padding: 15px;
+  outline: hidden;
+  border: none;
+  border-bottom: 2px solid;
+  border-image: linear-gradient(to right, aqua , skyblue) 1;
+  background-color: antiquewhite;
+
 }
 
 /* Buttons */
+
+button.button1 {
+  border: 2px solid black;
+  background-color: white;
+  color: black;
+  padding: 12px 23px;
+  font-size: 14px;
+  font-family: 'Metropolis';
+  cursor: pointer;
+  border-color: #333;
+  color: #333;
+  transition: 0.4s;
+}
+
+button.button1.active {
+  background-color: #333;
+  color: white;
+}
 
 /* Texts */
 
